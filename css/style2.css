@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1 {
+    background-color: brown;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 2%;
+    font-size: 3vw;
+}
+
+.form {
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+dl {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    font-size: 1.8vw;
+    border-top: 1px solid #e8ecef;
+}
+
+
+dt {
+    width: 50%;
+    border-bottom: 1px solid #e8ecef;
+    border-right: 1px solid #e8ecef;
+    border-left: 1px solid #e8ecef;
+    padding: 1%;
+}
+
+dd {
+    width: 50%;
+    border-bottom: 1px solid #e8ecef;
+    border-right: 1px solid #e8ecef;
+    padding: 1%;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e8ecef;
+}
+
+label {
+    margin-right: 3%;
+}
+
+a.button {
+    color: black;
+    border: 1px solid #dcdcdc;
+    background-color: #e8ecef;
+    padding: 1%;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: .3vh;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 1.8vw;
+}
+
+a.button:hover {
+    background-color: #dcdcdc;
+}
+
+p {
+    margin-top: 2%;
+    font-size: 1.2vw;
+}
+
+input[name="fee"] {
+    text-align: right;
+}
+
+input[name="uriage"] {
+    text-align: right;
+}
+
+@media(max-width:414px) {
+
+    * {
+        font-size: 3vw;
+    }
+
+    h1,
+    a.button {
+        font-size: 3vw;
+    }
+
+    input[type="radio"] {
+        width: 4%;
+    }
+
+}

@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+*{
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1 {
+    background-color: brown;
+    padding: 2%;
+    color: #fff;
+    text-align: center;
+    font-size: 3vw;
+}
+
+form {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 2%;
+}
+
+h2 {
+    color: #b0862e;
+    border-top: 1px solid#e8ecef;
+    text-align: center;
+    border-bottom: 1px solid #e8ecef;
+    font-size: 2vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 8px 8px -8px rgba(0, 0, 0, 0.5), 0 -8px 8px -8px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+    color: #b0862e;
+    font-size: 2vw;
+}
+
+.container1,
+.container2 {
+    padding: 1%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+dl {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.8vw;
+}
+
+dl:first-child {
+    border-top: 1px solid #e8ecef;
+}
+
+dt {
+    width: 40%;
+    border-bottom: 1px solid #e8ecef;
+    border-right: 1px solid #e8ecef;
+    border-left: 1px solid #e8ecef;
+    padding: 1%;
+}
+
+dd {
+    width: 60%;
+    border-bottom: 1px solid #e8ecef;
+    border-right: 1px solid #e8ecef;
+    padding: 1%;
+}
+
+.required {
+    color: red;
+    margin-left: 4px;
+    /* 必要に応じてアスタリスクと入力欄の間隔を調整 */
+}
+
+label {
+    margin-right: 3%;
+    margin-left: 1%;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e8ecef;
+}
+
+a.button {
+    color: black;
+    border: 1px solid #dcdcdc;
+    background-color: #e8ecef;
+    padding: 3px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: .3vh;
+    font-size: 1.5vw;
+}
+
+a.button:hover {
+    background-color: #dcdcdc;
+}
+
+a.this {
+    color: blue;
+    text-decoration: none;
+}
+
+footer {
+    margin-top: 5%;
+}
+
+footer p {
+    font-size: 1vw;
+}
+
+@media(max-width:414px){
+    
+
+    *{
+        font-size: 3vw;
+    }
+
+    h1,
+    h2,
+    footer p,
+    a.button,
+    a.this {
+        font-size: 3vw;
+    }
+
+    label {
+        margin-right: 16%;
+        margin-left: 2%;
+    }
+
+    input[type="radio"] {
+        width: 4%;
+    }
+}

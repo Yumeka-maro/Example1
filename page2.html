@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <meta name="description" content="テキストテキストテキストテキストテキストテキストテキストテキスト">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    
+    <script>
+        function calculateInsurance() {
+            // 参考の見積もりデータ
+            const referenceData = [
+                { min: 0, max: 5000, result: 6220 },
+                { min: 5001, max: 10000, result: 9930 },
+                { min: 10001, max: 15000, result: 19230 },
+                { min: 15001, max: 20000, result: 19230 },
+                { min: 20001, max: 25000, result: 19230 },
+                { min: 25001, max: 30000, result: 20840 },
+                { min: 30001, max: 35000, result: 23385 },
+                { min: 35001, max: 40000, result: 25668 },
+                { min: 40001, max: 45000, result: 27686 },
+                { min: 45001, max: 50000, result: 29440 },
+                { min: 50001, max: 55000, result: 31540 },
+                { min: 55001, max: 60000, result: 33486 },
+                { min: 60001, max: 65000, result: 35279 },
+                { min: 65001, max: 70000, result: 36920 },
+                { min: 70001, max: 75000, result: 38836 },
+                { min: 75001, max: 80000, result: 40659 },
+                { min: 80001, max: 85000, result: 42385 },
+                { min: 85001, max: 90000, result: 44016 },
+                { min: 90001, max: 95000, result: 45551 },
+                { min: 95001, max: 100000, result: 46990 },
+                { min: 100001, max: Number.MAX_VALUE, result: "お問い合わせください" },
+                // 以降、必要に応じてデータを追加
+            ];
+
+            // 酒類の売上高取得
+            const uriageInput = document.querySelector('input[name="uriage"]');
+            const uriage = parseFloat(uriageInput.value) || 0;
+
+            // 選択された業種による係数（例: 酒類販売業の場合、係数1.5）
+            const gyousyuCoefficient = document.getElementById('sake').checked ? 1.5 : 1.0;
+
+            // 計算ロジック（ここでは最初に初期値を設定し、条件に合致する場合に上書きする形に変更）
+            let totalResult = "お問い合わせください";
+            referenceData.forEach(data => {
+                if (uriage >= data.min && (uriage <= data.max || data.max === Number.MAX_VALUE)) {
+                    totalResult = (data.result === "お問い合わせください") ? "お問い合わせください" : (data.result * gyousyuCoefficient).toFixed(0);
+                }
+            });
+
+            // 月額の保険料を表示
+            const feeInput = document.querySelector('input[name="fee"]');
+
+            // 修正: "お問い合わせください" の場合はそのまま表示、それ以外は数値に変換
+            feeInput.value = (totalResult === "お問い合わせください") ? totalResult : totalResult;
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>お見積り</h1>
+        <div class="form">
+            <dl>
+                <dt>御社の主な業種（売上高で判断してください）</dt>
+                <dd>
+                    <input type="radio" name="inquiry_type" id="sake" value="酒類販売業" style="transform:scale(1.4)">
+                    <label for="sake">酒類販売業</label>
+                    <input type="radio" name="inquiry_type" id="other" value="それ以外" style="transform:scale(1.4)">
+                    <label for="other">それ以外</label>
+                </dd>
+                <dt>酒類販売業の売上高</dt>
+                <dd><input type="text" name="uriage">万円</dd>
+            </dl>
+            <a href="javascript:void(0);" onclick="calculateInsurance()" class="button">保険料表示</a>
+            <a href="index.html" class="button">戻る</a>
+            <dl class="d2">
+                <dt>あなたの会社の概算保険料</dt>
+                <dd>月額<input type="text" name="fee">円</dd>
+            </dl>
+            <p>
+                表示される保険料は主な売上高が酒販事業者の場合の概算保険料になります。<br>
+                ビジネスマスター・プラス商取引ユニット　休業ユニット（供給先占有物件のみ補償特約セット）<br>
+                売掛金補償1取引先あたり100万円　保険期間中1,000万円<br>
+                取引先の休業に伴う損害補償1事故100万円の例です。
+            </p>
+            <a href="page1.html" target="_blank" class="button">正式見積依頼</a>
+            <a href="index.html" class="button">戻る</a>
+        </div>
+    </main>
+</body>
+
+</html>

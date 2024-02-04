@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <meta name="description" content="テキストテキストテキストテキストテキストテキストテキストテキスト">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        // JavaScriptでAPIを呼び出し、結果を取得して住所をセットする関数
+        function getAddress() {
+            // 入力された郵便番号を取得
+            var postalCode = document.getElementById('postalCode').value;
+
+            // Japan Postの郵便番号検索APIを使用（サンプルキーを使用しています）
+            var apiUrl = 'https://api.zipaddress.net/?zipcode=' + postalCode;
+
+            // APIを呼び出し
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // 住所を取得してinputにセット
+                    document.getElementById('address').value = data.data.fullAddress;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        // フォームの入力内容をリセットする関数
+        function resetForm() {
+            document.getElementById('myForm').reset();
+        }
+
+
+        // フォームのデータをPHPファイルに送信する関数
+        function submitForm() {
+            // フォームデータの取得
+            var formData = new FormData(document.getElementById("myForm"));
+
+            // PHPファイルへのリクエスト
+            fetch("submit_form.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    // 成功したら適切な処理を行う
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <h1>ビジネスマスタープラス</h1>
+    </header>
+    <form id="myForm">
+        <main>
+            <h2>お問い合わせ</h2>
+            <div class="container1">
+                <h3>お問い合わせ内容</h3>
+                <div class="inneer1">
+                    <dl>
+                        <dt>お問い合せ事項</dt>
+                        <dd>
+                            <input type="radio" name="inquiry_type" id="inquiry" value="お問合せ" style="transform:scale(1.4)"><label
+                                for="inquiry">お問合せ</label>
+                            <input type="radio" name="inquiry_type" id="estimate" value="見積希望" style="transform:scale(1.4)"><label
+                                for="estimate">見積希望</label>
+                            <input type="radio" name="inquiry_type" id="contract" value="契約希望" style="transform:scale(1.4)"><label
+                                for="contract">契約希望</label>
+                            <input type="radio" name="inquiry_type" id="other" value="その他" style="transform:scale(1.4)"><label
+                                for="other">その他</label>
+                        </dd>
+                        <dt>お問い合せ内容</dt>
+                        <dd>
+                            <input type="text">
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="container2">
+                <h3>お役様情報</h3>
+                <p><span class="required">*</span>印は必須項目です。</p>
+                <div class="inner2">
+                    <dl>
+                        <dt>法人/個人</dt>
+                        <dd>
+                            <input type="radio" name="entity_type" id="corporate" value="法人" style="transform:scale(1.4)"><label
+                                for="corporate">法人</label>
+                            <input type="radio" name="entity_type" id="individual" value="個人" style="transform:scale(1.4)"><label
+                                for="individual">個人</label>
+                        </dd>
+                        <dt>（法人の場合）会社名</dt>
+                        <dd><input type="text"></dd>
+                        <dt>（法人の場合）部署/<br>お問い合せの方の役職</dt>
+                        <dd><input type="text"></dd>
+                        <dt>氏名<span class="required">*</span></dt>
+                        <dd><input type="text" required></dd> <!-- 必須入力に変更 -->
+                        <dt>メールアドレス<span class="required">*</span></dt>
+                        <dd><input type="text" name="email" id="" required></dd> <!-- 必須入力に変更 -->
+                        <dt>郵便番号</dt>
+                        <dd>
+                            <input type="text" id="postalCode">
+                            <a href="javascript:void(0);" onclick="getAddress()" class="button">〒から住所を自動入力</a>
+                        </dd>
+                        <dt>ご住所</dt>
+                        <dd><input type="text" id="address"></dd>
+                        <dt>電話</dt>
+                        <dd><input type="text"></dd>
+                        <div class="g-recaptcha" data-sitekey="6Lc9xmApAAAAAEjmgnvdYoCrsaHFeLQHMtaiojsE"></div>
+                    </dl>
+
+                </div>
+            </div>
+
+        </main>
+        <footer>
+            <p><span class="required">*</span>ご送信いただいた個人情報は弊社の規定に則り管理し、今回のお問い合わせ内容の対応のみに利用いたします。当社の個人情報管理規定は
+                <a href="" class="this">こちら</a>
+            </p>
+            <p><span class="required">*</span>営業連絡(送信者の商品やサービスの紹介)、いたずら連絡は一切お断りいたします。
+                これに反し連絡をされた方は恐縮ですが対応事務費をお支払いいただきます。本内容にご同意の上送信ください。</p>
+            <a href="javascript:void(0);" onclick="resetForm()" class="button">取り消す</a>
+            <a href="javascript:void(0);" onclick="submitForm()" class="button">入力内容を送信する</a>
+        </footer>
+    </form>
+</body>
+
+</html>
